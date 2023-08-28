@@ -2,31 +2,32 @@ print("""
 Hello World!
 This is my first lesson.
 """)
-
-# Asking about age with lack of input check
-
+# Asking about age with lack of input and integer check
 def input_check(age):
     if len(age) == 0:
         return False
     else:
-        age = int(age)
         return True
-
-ADULT_THR = 18
-user_status = "udefined"
-age = input("Can you please type your age? ")
-input_result=input_check(age)
-    
-#if (input_result == True) and (age >= ADULT_THR):
-#    user_status = "an adult"
-#    print(f"You are {user_status}.")
-#elif (input_result == True) and (age < ADULT_THR):
-#    user_status = "a child"
-#    print(f"You are {user_status}.")
-#else:
-#    print("You didn't give your age.")
-
-print(f"\ninput_check = {input_check(age)}\nuser_status = {user_status}\nage variable type = {type(age)}") # print variables
+ADULT_THR = [18,120]
+# user_status = "udefined" # print variables declaration
+age = input("Type your age: ")
+input_check_result=input_check(age)
+if input_check_result == True:
+    try:
+        age = int(age)
+    except ValueError:
+        print("You did not enter a number. Try using integers.")
+        exit()
+if (input_check_result == True) and (age >= ADULT_THR[0]) and (age < ADULT_THR[1]):
+    user_status = "an adult"
+elif (input_check_result == True) and (age < ADULT_THR[0]) and (age < ADULT_THR[1]):
+    user_status = "a child"
+elif (input_check_result == True) and (age > ADULT_THR[0]) and (age >= ADULT_THR[1]):
+    user_status = "immortal?"
+else:
+    user_status = "without an age?"
+print(f"You are {user_status}.\n")
+# print(f"\ninput_check_result = {input_check_result}\nuser_status = {user_status}\nage variable type = {type(age)}") # print variables
 
 
 
