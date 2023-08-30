@@ -18,7 +18,7 @@ if input_check_result == True:
     except ValueError:
         print("You did not enter a number. Try using integers.")
         exit()
-if (input_check_result == True) and (age >= ADULT_THR[0]) and (age < ADULT_THR[1]):
+if input_check_result and ADULT_THR[1] > age >= ADULT_THR[0]:
     user_status = "an adult"
 elif (input_check_result == True) and (age < ADULT_THR[0]) and (age < ADULT_THR[1]):
     user_status = "a child"
