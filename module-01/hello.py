@@ -2,16 +2,16 @@ print("""
 Hello World!
 This is my first lesson.
 """)
-# Asking about age with lack of input and integer check
-def input_check(age):
+# Asking about age.
+def input_check(age): # Empty variable check funcition.
     if len(age) == 0:
         return False
     else:
         return True
 ADULT_THR = [18,120]
-# user_status = "udefined" # print variables declaration
+user_status = None # Reserving the variable
 age = input("Type your age: ")
-input_check_result=input_check(age)
+input_check_result = input_check(age)
 if input_check_result == True:
     try:
         age = int(age)
@@ -27,7 +27,7 @@ elif (input_check_result == True) and (age > ADULT_THR[0]) and (age >= ADULT_THR
 else:
     user_status = "without an age?"
 print(f"You are {user_status}.\n")
-# print(f"\ninput_check_result = {input_check_result}\nuser_status = {user_status}\nage variable type = {type(age)}") # print variables
+print(f"\ninput_check_result = {input_check_result}\nuser_status = {user_status}\nage variable type = {type(age)}") # print variables
 
 
 
