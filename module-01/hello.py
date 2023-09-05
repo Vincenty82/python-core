@@ -27,7 +27,7 @@ elif (input_check_result == True) and (age > ADULT_THR[0]) and (age >= ADULT_THR
 else:
     user_status = "without an age?"
 print(f"You are {user_status}.\n")
-print(f"\ninput_check_result = {input_check_result}\nuser_status = {user_status}\nage variable type = {type(age)}") # print variables
+# print(f"\ninput_check_result = {input_check_result}\nuser_status = {user_status}\nage variable type = {type(age)}") # print variables
 
 
 
@@ -36,13 +36,14 @@ _not_to_be_trifled_with = "Told you not to use this!"
 
 # print(f"{_not_to_be_trifled_with}")
 
-x = 2
-y = x + 10
+import math
+a = -2
+b = 7
+c = -6
+D = math.pow(b,2) - 4 * a * c
+x1 = ( -b - math.pow(D,0.5) ) / ( 2 * a )
+x2 = ( -b - math.pow(D,0.5) ) / ( 2 * a )
 
-# print(f"y={y}")
-
-a = 1
-b = 2
-c = a + b + 10
-
-# print(f"c={c}")
+print(D)
+print(x1)
+print(x2)
