@@ -63,7 +63,7 @@
 # while num:
 #     for i in range(num + 1):
 #         sum = sum + i
-#         print(f"i={i} sum={sum}")
+#         print(f"i={i} sum={sum}")  # Print each step
 #     num = int(input("Enter integer (0 for output): "))
 # print(f"Final sum:{sum}")
 

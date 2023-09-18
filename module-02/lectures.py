@@ -75,3 +75,6 @@ while True:
         answer = input("Do you want to try again? Y/N ")
     if answer in ["N", "n"]:
         break
+
+
+type()
