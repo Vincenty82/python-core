@@ -81,15 +81,15 @@
 #         return 1
 #     else:
 #         return n * factorial(n - 1)
+    
+
 # def number_of_groups(n, k):
 #     return int(factorial(n) / (factorial(n - k) * factorial(k)))
 
-# ZADANIE 11
+# ZADANIE 11 Ciąg Fibonacciego
 
 def fibonacci(n):
-    if n == 0:
-        return 0
-    elif n == 1:
-        return 1
+    if n < 0:
+        return n
     else:
         return fibonacci(n - 1) + fibonacci(n - 2)
