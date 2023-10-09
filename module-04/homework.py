@@ -91,3 +91,6 @@
 #     return distance
 
 # ZADANIE 8
+
+def game(terra, power):
+    return
