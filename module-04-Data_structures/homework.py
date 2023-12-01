@@ -154,6 +154,44 @@ def is_valid_pin_codes(pin_codes):
         return False
     return True
 
+# ZADANIE 10
+
+from random import randint
+
+def get_random_password():
+    password = ""
+    for _ in range(8):
+        character = chr(randint(40, 126))
+        password += character
+    print(f"password = {password}")
+    return password
+
+# ZADANIE 11
+
+def is_valid_password(password):
+    is_strong_password = is_upper_case = is_lower_case = is_number = False
+    print(f"\npassword = {password}")
+    if len(password) != 8:
+        print(f"password_lenght = {len(password)}  is_strong_password = {is_strong_password}")
+        return is_strong_password
+    for char in password:
+        if 47 < ord(char) < 58:
+            is_number = True
+            print(f"{char}  number")
+        elif 64 < ord(char) < 91:
+            is_upper_case = True
+            print(f"{char}  upper_case")
+        elif 96 < ord(char) < 123:
+            is_lower_case = True
+            print(f"{char}  lower_case")
+        else:
+            print(f"{char}  special_character")
+    if is_number and is_upper_case and is_lower_case:
+        is_strong_password = True
+    print(f"contains_numbers = {is_number}  contains_upper_cases = {is_upper_case}  contains_lower_cases = {is_lower_case}")
+    print(f"password_lenght = {len(password)}  is_strong_password = {is_strong_password}")
+    return is_strong_password
+
 # WYWOŁANIA TESTOWE
 
 if __name__ == "__main__":
@@ -165,7 +203,8 @@ if __name__ == "__main__":
     # lookup_key({'key1': 1, 'key2': 2, 'key3': 3, 'key4': 2}, 2) # ZADANIE 5
     # split_list([1, 12, 3, 24, 5]) # ZADANIE 6
     # calculate_distance([0, 1, 3, 2, 0]) # ZADANIE 7
-    # game([[1, 1, 5, 10], [10, 2], [1, 1, 1]], 1) # ZADANIE 6
-    is_valid_pin_codes(['1101', '9034', '0011', '12345', '123', '1abc']) # ZADANIE 9
-    
+    # game([[1, 1, 5, 10], [10, 2], [1, 1, 1]], 1) # ZADANIE 8
+    # is_valid_pin_codes(['1101', '9034', '0011', '12345', '123', '1abc']) # ZADANIE 9
+    # get_random_password() # ZADANIE 10
+    # is_valid_password("7Ab!ddFZ")# ZADANIE 11
     exit
