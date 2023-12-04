@@ -95,20 +95,20 @@
 
 # ZADANIE 13 <-- SZYFR CEZARA
 
-# message = input("Enter a message: ")
-# offset = int(input("Enter the offset: "))
-# encoded_message = ""
-# for ch in message:
-#     if "A" <= ch <= "Z":
-#         pos = ord(ch) - ord("A")
-#         pos = (pos + offset) % 26
-#         new_char = chr(pos + ord("A"))
-#         encoded_message += new_char
-#     elif "a" <= ch <= "z":
-#         encoded_message += chr((((ord(ch) - ord("a")) + offset) % 26) + ord("a"))
-#     else:
-#         encoded_message += ch
-# print(encoded_message)
+message = input("Enter a message: ")
+offset = int(input("Enter the offset: "))
+encoded_message = ""
+for ch in message:
+    if "A" <= ch <= "Z":
+        pos = ord(ch) - ord("A")
+        pos = (pos + offset) % 26
+        new_char = chr(pos + ord("A"))
+        encoded_message += new_char
+    elif "a" <= ch <= "z":
+        encoded_message += chr((((ord(ch) - ord("a")) + offset) % 26) + ord("a"))
+    else:
+        encoded_message += ch
+print(encoded_message)
 
 # ZADANIE 14
 
@@ -121,35 +121,35 @@
 
 # ZADANIE 15
 
-result = 0.0
-operand = 0.0
-operator = "+"
-wait_for_number = True
+# result = 0.0
+# operand = 0.0
+# operator = "+"
+# wait_for_number = True
 
-while True:
-    if wait_for_number:
-        try:
-            operand = input(">>> ")
-            if operator == "+":
-                result = result + float(operand)
-            elif operator == "-":
-                result = result - float(operand)
-            elif operator == "/":
-                result = result / float(operand)
-            else:
-                result = result * float(operand)
-            wait_for_number = False
-            continue
-        except ValueError:
-            print(f"\'{operand}\' nie jest liczbą. Spróbuj ponownie")
-    else:
-        operator = input(">>> ")
-        while operator not in ["+","-","/","*","="]:
-            print(f"{operator} nie jest \'+\' lub \'-\' lub \'/\' \'*\'. Spróbuj ponownie")
-            operator = input(">>> ")
-        if operator in ["+","-","/","*"]:
-            wait_for_number = True
-            continue
-        elif operator == "=":
-            print(f"Wynik: {result}")
-            break
+# while True:
+#     if wait_for_number:
+#         try:
+#             operand = input(">>> ")
+#             if operator == "+":
+#                 result = result + float(operand)
+#             elif operator == "-":
+#                 result = result - float(operand)
+#             elif operator == "/":
+#                 result = result / float(operand)
+#             else:
+#                 result = result * float(operand)
+#             wait_for_number = False
+#             continue
+#         except ValueError:
+#             print(f"\'{operand}\' nie jest liczbą. Spróbuj ponownie")
+#     else:
+#         operator = input(">>> ")
+#         while operator not in ["+","-","/","*","="]:
+#             print(f"{operator} nie jest \'+\' lub \'-\' lub \'/\' \'*\'. Spróbuj ponownie")
+#             operator = input(">>> ")
+#         if operator in ["+","-","/","*"]:
+#             wait_for_number = True
+#             continue
+#         elif operator == "=":
+#             print(f"Wynik: {result}")
+#             break
