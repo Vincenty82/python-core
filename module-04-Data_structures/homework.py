@@ -192,10 +192,42 @@ def is_valid_password(password):
     print(f"password_lenght = {len(password)}  is_strong_password = {is_strong_password}")
     return is_strong_password
 
+# ZADANIE 12
+
+def get_password():
+    for _ in range(100):
+        password = get_random_password()
+        if is_valid_password(password):
+            print(password)
+            return password
+
+# ZADANIE 13
+
+from pathlib import Path
+
+def parse_folder(path):
+    files = []
+    folders = []
+    for file_or_folder in path.iterdir():
+        if file_or_folder.is_file():
+            files.append(file_or_folder.name)
+        else:
+            folders.append(file_or_folder.name)
+    return files, folders
+
+# ZADANIE 14
+
+import sys
+
+def parse_args():
+    result = ""
+    result = " ".join(sys.argv[1:])
+    return result
+
 # WYWOŁANIA TESTOWE
 
 if __name__ == "__main__":
-    # amount_payment([10, 20, -5, 30, 20]) # ZADANIE 1
+    # amount_payment([10, 20, -5, 30, 20]) # ZADANIE 1cl
     # prepare_data([1, -3, 4, 100, 0, -5, 10, 1, 1]) # ZADANIE 2
     # format_ingredients(["2 eggs", "1 liter sugar", "1 tsp salt", "vinegar"]) # ZADANIE 3
     # get_grade("A") # ZADANIE 4a
@@ -206,5 +238,8 @@ if __name__ == "__main__":
     # game([[1, 1, 5, 10], [10, 2], [1, 1, 1]], 1) # ZADANIE 8
     # is_valid_pin_codes(['1101', '9034', '0011', '12345', '123', '1abc']) # ZADANIE 9
     # get_random_password() # ZADANIE 10
-    # is_valid_password("7Ab!ddFZ")# ZADANIE 11
+    # is_valid_password("7Ab!ddFZ") # ZADANIE 11
+    # get_password() # ZADANIE 12
+    # print(parse_folder(Path(".."))) # ZADANIE 13
+    # print(parse_args()) # ZADANIE 4
     exit
