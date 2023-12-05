@@ -13,4 +13,4 @@ def real_len(text):
 # WYWOLANIA
 
 if __name__ == "__main__":
-    real_len("Alex\nKd\\fe23\t\f\v.\r")
+    real_len("Alex\nKdfe23\t\f\v.\r")
