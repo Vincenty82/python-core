@@ -87,6 +87,41 @@ def get_phone_numbers_for_countries(list_phones):
             Ukraine.append(new_phone)
     return categorized_phones
 
+# ZADANIE 6
+
+import re
+
+def is_spam_words(text, spam_words, space_around=False):
+    for word in spam_words:
+        if space_around:
+            if re.search(r"\b" + word + r"\b", text):
+                return True
+        else:
+            if re.search(word, text):
+                return True
+    return False
+
+# ZADANIE 7
+
+CYRILLIC_SYMBOLS = "абвгдеёжзийклмнопрстуфхцчшщъыьэюяєіїґ"
+TRANSLATION = ("a", "b", "v", "g", "d", "e", "e", "j", "z", "i", "j", "k", "l", "m", "n", "o", "p", "r", "s", "t", "u", "f", "h", "ts", "ch", "sh", "sch", "", "y", "", "e", "yu", "ya", "je", "i", "ji", "g")
+
+TRANS = {}
+
+for cyrillic_char, translation_char in zip(CYRILLIC_SYMBOLS, TRANSLATION):
+    TRANS[ord(cyrillic_char)] = translation_char
+    TRANS[ord(cyrillic_char.upper())] = translation_char.upper()
+
+def translate(name):
+    return name.translate(TRANS)
+
+# ZADANIE 8
+
+grades = {"A": 5, "B": 5, "C": 4, "D": 3, "E": 3, "FX": 2, "F": 1}
+
+def formatted_grades(students):
+    return students
+
 # WYWOLANIA
 
 if __name__ == "__main__":
@@ -99,7 +134,14 @@ if __name__ == "__main__":
         # find_articles("Ocean", True),                                                                 # ZADANIE 2
         # sanitize_phone_number("    +38(050)123-32-34"),                                               # ZADANIE 3  
         # is_check_name("Kevin Costner", "Kevin"),                                                      # ZADANIE 4            
-        # get_phone_numbers_for_countries(['380998759405', '818765347', '8867658976', '657658976'])     # ZADANIE 5                  
+        # get_phone_numbers_for_countries(['380998759405', '818765347', '8867658976', '657658976'])     # ZADANIE 5     
+        # is_spam_words("Copycat", ["cat"]),                                                            # ZADANIE 6 
+        # is_spam_words("Copycat", ["cat"], True),
+        # is_spam_words("Copy cat.", ["cat"]),
+        # is_spam_words("Copy cat.", ["cat"], True), 
+        # translate("Дмитрий Коробов"),                                                                 # ZADANIE 7
+        # translate("Александр Иванович"),
+        formatted_grades({"Nick": "A", "Olga": "B", "Mike": "FX", "Anna": "C"})                       # ZADANIE 8
     ]
     
     # WYKONANIE FUNKCJI I WYŚWIETLENIE WYNIKÓW
