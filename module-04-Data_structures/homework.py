@@ -163,42 +163,42 @@ def get_random_password():
     for _ in range(8):
         character = chr(randint(40, 126))
         password += character
-    print(f"password = {password}")
+    # print(f"password = {password}")
     return password
 
 # ZADANIE 11
 
 def is_valid_password(password):
     is_strong_password = is_upper_case = is_lower_case = is_number = False
-    print(f"\npassword = {password}")
+    # print(f"\npassword = {password}")
     if len(password) != 8:
-        print(f"password_lenght = {len(password)}  is_strong_password = {is_strong_password}")
+        # print(f"password_lenght = {len(password)}  is_strong_password = {is_strong_password}")
         return is_strong_password
     for char in password:
         if 47 < ord(char) < 58:
             is_number = True
-            print(f"{char}  number")
+            # print(f"{char}  number")
         elif 64 < ord(char) < 91:
             is_upper_case = True
-            print(f"{char}  upper_case")
+            # print(f"{char}  upper_case")
         elif 96 < ord(char) < 123:
             is_lower_case = True
-            print(f"{char}  lower_case")
-        else:
-            print(f"{char}  special_character")
+            # print(f"{char}  lower_case")
+        # else:
+            # print(f"{char}  special_character")
     if is_number and is_upper_case and is_lower_case:
         is_strong_password = True
-    print(f"contains_numbers = {is_number}  contains_upper_cases = {is_upper_case}  contains_lower_cases = {is_lower_case}")
-    print(f"password_lenght = {len(password)}  is_strong_password = {is_strong_password}")
+    # print(f"contains_numbers = {is_number}  contains_upper_cases = {is_upper_case}  contains_lower_cases = {is_lower_case}")
+    # print(f"password_lenght = {len(password)}  is_strong_password = {is_strong_password}")
     return is_strong_password
 
 # ZADANIE 12
 
-def get_password():
+def get_password():   
     for _ in range(100):
         password = get_random_password()
         if is_valid_password(password):
-            print(password)
+            # print(password)
             return password
 
 # ZADANIE 13
@@ -227,19 +227,29 @@ def parse_args():
 # WYWOŁANIA TESTOWE
 
 if __name__ == "__main__":
-    # amount_payment([10, 20, -5, 30, 20]) # ZADANIE 1cl
-    # prepare_data([1, -3, 4, 100, 0, -5, 10, 1, 1]) # ZADANIE 2
-    # format_ingredients(["2 eggs", "1 liter sugar", "1 tsp salt", "vinegar"]) # ZADANIE 3
-    # get_grade("A") # ZADANIE 4a
-    # get_description("A") # ZADANIE 4b
-    # lookup_key({'key1': 1, 'key2': 2, 'key3': 3, 'key4': 2}, 2) # ZADANIE 5
-    # split_list([1, 12, 3, 24, 5]) # ZADANIE 6
-    # calculate_distance([0, 1, 3, 2, 0]) # ZADANIE 7
-    # game([[1, 1, 5, 10], [10, 2], [1, 1, 1]], 1) # ZADANIE 8
-    # is_valid_pin_codes(['1101', '9034', '0011', '12345', '123', '1abc']) # ZADANIE 9
-    # get_random_password() # ZADANIE 10
-    # is_valid_password("7Ab!ddFZ") # ZADANIE 11
-    # get_password() # ZADANIE 12
-    # print(parse_folder(Path(".."))) # ZADANIE 13
-    # print(parse_args()) # ZADANIE 4
-    exit
+    functions_to_execute = [
+        # amount_payment([10, 20, -5, 30, 20]),                                                    # ZADANIE 1
+        # prepare_data([1, -3, 4, 100, 0, -5, 10, 1, 1]),                                          # ZADANIE 2
+        # format_ingredients(["2 eggs", "1 liter sugar", "1 tsp salt", "vinegar"]),                # ZADANIE 3
+        # get_grade("A"),                                                                          # ZADANIE 4a
+        # get_description("A"),                                                                    # ZADANIE 4b
+        # lookup_key({'key1': 1, 'key2': 2, 'key3': 3, 'key4': 2}, 2),                             # ZADANIE 5
+        # split_list([1, 12, 3, 24, 5]),                                                           # ZADANIE 6
+        # calculate_distance([0, 1, 3, 2, 0]),                                                     # ZADANIE 7
+        # game([[1, 1, 5, 10], [10, 2], [1, 1, 1]], 1),                                            # ZADANIE 8
+        # is_valid_pin_codes(['1101', '9034', '0011', '12345', '123', '1abc']),                    # ZADANIE 9
+        # get_random_password(),                                                                   # ZADANIE 10
+        # is_valid_password("7Ab!ddFZ"),                                                           # ZADANIE 11
+        # get_password(),                                                                          # ZADANIE 12
+        # print(parse_folder(Path(".."))),                                                         # ZADANIE 13
+        # print(parse_args()),                                                                     # ZADANIE 4
+    ]
+    
+    
+    if functions_to_execute:
+        for function_to_execute in functions_to_execute:
+            print()
+            print(f"return = {function_to_execute}")
+            print()
+    else:
+        print("\nWybierz funkcję z listy wywołań testowych.\n")
