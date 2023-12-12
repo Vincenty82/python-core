@@ -171,9 +171,47 @@ def find_all_words(text, word):
 example_spam_words = ["began", "Python"]
 
 def replace_spam_words(text, spam_words):
-    print("\ntext = ", text)
-    print("spam_words = ", spam_words)
-    return
+    # print("\ntext = ", text)                                                             
+    # print("spam_words = ", spam_words)
+    redacted_text = text
+    for spam_word in spam_words:
+        # print("    spam_word = ",spam_word)
+        redacted_text = re.sub(spam_word, "*"*len(spam_word), redacted_text, flags = re.IGNORECASE)
+        # print("    redacted_text = ", redacted_text)
+    print("redacted_text = ", redacted_text)
+    return redacted_text
+
+# ZADANIE 13
+
+example_emails_list = "Ima.Fool@iana.org Ima.Fool@iana.o 1Fool@iana.org first_last@iana.org first.middle.last@iana.or a@test.com abc111@test.com.net"
+
+def find_all_emails(text):
+    # print("\ntext = ", text)
+    pattern = r"[A-Za-z][A-Za-z0-9._]+@[a-z]+[.][a-z]{2,}"
+    # print("pattern = ", pattern)
+    result = re.findall(pattern, text)
+    # print("result = ", result)
+    return result
+
+# ZADANIE 14
+
+example_phones_list = "Irma +380(67)777-7-771 second +380(67)777-77-77 aloha a@test.com abc111@test.com.net +380(67)111-777-777+380(67)777-77-787"
+
+def find_all_phones(text):
+    pattern = r"\+380\(\d{2}\)\d{3}\-\d\-\d{3}|\+380\(\d{2}\)\d{3}\-\d{2}\-\d{2}"
+    result = re.findall(pattern, text)
+    return result
+
+# ZADANIE 15
+
+example_find_url = "The main search site in the world is https://www.google.com The main social network for people in the world is https://www.facebook.com But programmers have their own social network http://github.com There they share their code. some url to check https://www..facebook.com www.facebook.com"
+
+def find_all_links(text):
+    result = []
+    iterator = re.finditer(r"https?\:\/\/www\.[\w]+\.com|https?\:\/\/[\w]+\.com", text)
+    for match in iterator:
+        result.append(match.group())
+    return result
 
 # WYWOLANIA
 
@@ -200,7 +238,10 @@ if __name__ == "__main__":
         # find_word(example_text_1, example_word_2),    
         # find_all_words(example_text_1, example_word_1),                                               # ZADANIE 11
         # find_all_words(example_text_1, example_word_2),
-        replace_spam_words(example_text_2,example_spam_words)                                         # ZADANIE 12
+        # replace_spam_words(example_text_2, example_spam_words)                                        # ZADANIE 12
+        # find_all_emails(example_emails_list)                                                          # ZADANIE 13
+        # find_all_phones(example_phones_list)                                                          # ZADANIE 14
+        # find_all_links(example_find_url)                                                              # ZADANIE 15
     ]
     
     # WYKONANIE FUNKCJI I WYŚWIETLENIE WYNIKÓW
