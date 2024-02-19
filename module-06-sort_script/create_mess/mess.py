@@ -62,6 +62,28 @@ def move_files_to_directory(source_directory, target_directory):
 def remove_directory(directory):
     shutil.rmtree(directory)
 
+def clean_up():
+    # Define the folder to be deleted
+    folder_name = "Bałagan"
+
+    # Get the current directory
+    current_directory = os.getcwd()
+
+    # Construct the full path to the folder
+    folder_path = os.path.join(current_directory, folder_name)
+
+    # Check if the folder exists
+    if os.path.exists(folder_path):
+        # Delete the folder
+        shutil.rmtree(folder_path)
+        print(f"The folder '{folder_name}' has been deleted.")
+    else:
+        print(f"The folder '{folder_name}' does not exist in the current directory.")
+
+# Clean everything
+        
+clean_up()
+
 # Read words from both files
 english_words = read_words('words.txt')
 polish_words = read_words('polish_words.txt')
