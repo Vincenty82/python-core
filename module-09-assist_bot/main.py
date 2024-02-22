@@ -1,32 +1,35 @@
+EXIT_COMMANDS = ["good bye", "close", "exit", "."]
+COMMANDS_WITH_SPACE = ["show", "good"]
+EXISTING_COMMANDS = ["hello", "add", "edit","phone", "show all", "good bye", "close", "exit", "."]
+
 def input_error(func):
     def friendly_error_message(*args, **kwargs):
         try:
             return func(*args, **kwargs)
         except Exception as raised_exception:
-            if type(raised_exception) == ValueError and str(raised_exception) == "handle_cmd_add_contact_exists":
+            if isinstance(raised_exception, ValueError) and str(raised_exception) == "handle_cmd_add_contact_exists":
                 return f"ADD >> The contact you are trying to add already exists."
-            elif type(raised_exception) == TypeError and str(raised_exception) == "handle_cmd_add() missing 2 required positional arguments: 'contact_name' and 'phone_number'":
+            elif isinstance(raised_exception, TypeError) and str(raised_exception) == "handle_cmd_add() missing 2 required positional arguments: 'contact_name' and 'phone_number'":
                 return f"ADD >> When using ADD command, you need to provide both a name and a phone number to get a result."
-            elif type(raised_exception) == TypeError and str(raised_exception) == "handle_cmd_add() missing 1 required positional argument: 'phone_number'":
+            elif isinstance(raised_exception, TypeError) and str(raised_exception) == "handle_cmd_add() missing 1 required positional argument: 'phone_number'":
                 return f"ADD >> Thanks for providing the name, but you are still required to provide phone number as part of the command."
-            elif type(raised_exception) == TypeError and str(raised_exception) == "handle_cmd_edit() missing 2 required positional arguments: 'contact_name' and 'new_phone_number'":
+            elif isinstance(raised_exception, TypeError) and str(raised_exception) == "handle_cmd_edit() missing 2 required positional arguments: 'contact_name' and 'new_phone_number'":
                 return f"EDIT >> When using EDIT command, you need to provide both a name and a replacement phone number to get a result."
-            elif type(raised_exception) == TypeError and str(raised_exception) == "handle_cmd_edit() missing 1 required positional argument: 'new_phone_number'":
+            elif isinstance(raised_exception, TypeError) and str(raised_exception) == "handle_cmd_edit() missing 1 required positional argument: 'new_phone_number'":
                 return f"EDIT >> Thanks for providing the name, but you are still required to provide a replacement phone number as part of the command."
-            elif type(raised_exception) == TypeError and str(raised_exception) == "handle_cmd_phone() missing 1 required positional argument: 'contact_name'":
+            elif isinstance(raised_exception, TypeError) and str(raised_exception) == "handle_cmd_phone() missing 1 required positional argument: 'contact_name'":
                 return f"PHONE >> When you are using PHONE command, you need to provide a name with it to get a result."
-            elif type(raised_exception) == KeyError:
+            elif isinstance(raised_exception, KeyError):
                 return f"LOOK UP >> User does not seem to exist. Remember that contacts are case sensitive.\nIf you are not sure, you can always use \"show all\" command to find the right name."
             else:
                 return f"UKNOWN ERROR >> {type(raised_exception).__name__}: {str(raised_exception)}\nCONGRATULATIONS! I did not know this was possible. :)"
     return friendly_error_message
 
-
-def parse_command(COMMANDS_WITH_SPACE, user_input):
+def parse_command(user_input):
     parsed_input = user_input.split()
-    if len(parsed_input) == 2 and parsed_input[0].lower() in COMMANDS_WITH_SPACE:
-        parsed_input[0] = " ".join(parsed_input[:])
-        parsed_input.pop()
+    if len(parsed_input) >= 2 and parsed_input[0].lower() in COMMANDS_WITH_SPACE:
+        parsed_input[0] = " ".join(parsed_input[:2])
+        parsed_input.pop(1)
     return parsed_input
 
 def handle_cmd_hello():
@@ -64,6 +67,7 @@ def handle_cmd_exit():
     return "\nGood bye!\n"
 
 def main():
+
     contacts_dictionary = {
     "Beata": "506456245",
     "Joanna": "602167448",
@@ -71,17 +75,16 @@ def main():
     "Piotr": "502446239",
     "Andrzej": "601887990",
     }
-    EXIT_COMMANDS = ["good bye", "close", "exit", "."]
-    COMMANDS_WITH_SPACE = ["show", "good"]
-    EXISTING_COMMANDS = ["hello", "add", "edit", "show all", "phone", "show all", "good bye", "close", "exit", "."]
 
     while True:
-        parsed_command = ""
+
         user_input = input("\nEnter command:")
-        
+
         if user_input:
-            parsed_command, *arguments_list = parse_command(COMMANDS_WITH_SPACE, user_input)
-        
+            parsed_command, *arguments_list = parse_command(user_input)
+        else:
+            parsed_command = ""
+
         if parsed_command.lower() == "hello":
             print(handle_cmd_hello())
         elif parsed_command.lower() == "add":
