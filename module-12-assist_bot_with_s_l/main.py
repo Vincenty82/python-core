@@ -1,4 +1,6 @@
 from collections import UserDict
+from os import makedirs
+import shelve
 
 EXIT_COMMANDS = ["good bye", "close", "exit", "."]
 COMMANDS_WITH_SPACE = ["show", "good"]
@@ -61,6 +63,27 @@ class AddressBook(UserDict):
         if not results:
             raise ValueError("AddressBook-search_records=does_not_exist")
         return results
+    
+    @classmethod
+    def load_shelve_data(cls, filename, default_data):
+        """load_shelve_data method of AdressBook class will try to load database from file.
+        If file doesn't exist it will create a new one with default_data or an empty instance if default_data does not exist."""
+        try:
+            with shelve.open(filename) as db:
+                print("\nLOAD >> Loading ...")
+                data_base = db["saved_data"]
+                print(f"LOAD >> Loaded succesfully - {filename}")
+                return data_base
+        except KeyError:
+            print("LOAD >> Database not found - default data loaded")
+            return initialize_address_book(default_data)
+        
+
+    @classmethod
+    def save_shelve_data(cls, filename, data_to_store):
+        with shelve.open(filename) as db:
+            db['saved_data'] = data_to_store
+            print("\nSAVE >> Data saved")
 
 def input_error(func):
     def friendly_error_message(*args, **kwargs):
@@ -92,7 +115,7 @@ def input_error(func):
     return friendly_error_message
 
 def return_bot_version():
-    bot_version = "Assist Bot 2 - version 1.1"
+    bot_version = "Assist Bot 2 - version 1.2"
     return bot_version
 
 def initialize_address_book(contacts_data_set: dict):
@@ -186,7 +209,8 @@ def handle_cmd_show_all(ab_instance: AddressBook):
     show_all = "SHOW ALL >> Result\n\n    " + "\n    ".join(contacts_list)
     return show_all
 
-def handle_cmd_exit():
+def handle_cmd_exit(ab_instance):
+    AddressBook.save_shelve_data("./data/address_book.db", ab_instance)
     return "\n" + "Good bye!".center(50) + "\n"
 
 def main():
@@ -199,10 +223,13 @@ def main():
     "andrzej zieliński": ["601887990", "700345788", "226106573"],
     }
 
-    # ab_instance = initialize_address_book(contacts_dictionary)          # with emails
-    ab_instance = initialize_address_book(contacts_dictionary)        # just phones
-
     print("\n" + return_bot_version().center(50))
+
+    # ab_instance = initialize_address_book(contacts_dictionary)                                                  # with emails
+    # ab_instance = initialize_address_book(contacts_dictionary)                                                  # just phones
+    makedirs("./data", exist_ok = True)
+    ab_instance = AddressBook.load_shelve_data("./data/address_book.db", contacts_dictionary)  # load from file
+
 
     while True:
 
@@ -227,7 +254,7 @@ def main():
             elif parsed_command.lower() == "show all":
                 print(handle_cmd_show_all(ab_instance))
             elif parsed_command.lower() in EXIT_COMMANDS:
-                print(handle_cmd_exit())
+                print(handle_cmd_exit(ab_instance))
                 break
         else:
             print(f"Command \"{parsed_command}\" was not recognized.\nEXISTING COMMANDS >> {', '.join(EXISTING_COMMANDS)}")
